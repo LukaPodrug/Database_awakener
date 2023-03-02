@@ -14,12 +14,11 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const tvornicaSnageJob = cron.schedule('*/1 * * * *', async () => {
+const tvornicaSnageJob = cron.schedule('*/5 * * * *', async () => {
     try {
         const admins = await tvornicaSnageDatabase`
             select username
             from coaches`
-        console.log(admins)
         return admins
     }
     catch(error) {
