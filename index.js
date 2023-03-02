@@ -16,11 +16,11 @@ app.use(bodyParser.json())
 
 const tvornicaSnageJob = cron.schedule('*/20 * * * *', async () => {
     try {
-        await tvornicaSnageDatabase`
+        const adminUsernames = await tvornicaSnageDatabase`
             select username
             from coaches`
         console.log('tvornica snage job finished')
-        return
+        return adminUsernames
     }
     catch(error) {
         console.log(error)
