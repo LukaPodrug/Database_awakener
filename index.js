@@ -20,9 +20,11 @@ const tvornicaSnageJob = cron.schedule('*/20 * * * *', async () => {
             select username
             from coaches`
         console.log('tvornica snage job finished')
+        return
     }
     catch(error) {
         console.log(error)
+        return
     }
 })
 
