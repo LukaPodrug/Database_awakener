@@ -14,7 +14,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-const tvornicaSnageJob = cron.schedule('*/20 * * * *', async () => {
+const tvornicaSnageJob = cron.schedule('*/3 * * * *', async () => {
     try {
         const adminUsernames = await tvornicaSnageDatabase`
             select username
