@@ -14,7 +14,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
-app.get((req, res) => {
+app.get('/', (req, res) => {
     res.status(200).json('App recieved get request')
 })
 
