@@ -14,12 +14,16 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+app.get((req, res) => {
+    res.status(200).json('App recieved get request')
+})
+
 const tvornicaSnageJob = cron.schedule('*/3 * * * *', async () => {
     try {
         const adminUsernames = await tvornicaSnageDatabase`
             select username
             from coaches`
-        console.log('tvornica snage job finished')
+        console.log('Tvornica snage job finished')
         return adminUsernames
     }
     catch(error) {
