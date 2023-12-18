@@ -6,6 +6,7 @@ const cron = require('node-cron')
 require('dotenv').config()
 
 const tvornicaSnageDatabase = require('./database/tvornica_snage')
+const sudokuSolverDatabase = require('./database/sudoku_solver')
 
 const { PORT } = process.env
 
@@ -31,6 +32,20 @@ const tvornicaSnageJob = cron.schedule('*/1 * * * *', async () => {
 })
 
 tvornicaSnageJob.start()
+
+const sudokuSolverJob = cron.schedule('*/1 * * * *', async () => {
+    try {
+        const version = await sudokuSolverDatabase`select version()`
+        console.log('Sudoku solver job finished')
+        return version
+    }
+    catch(error) {
+        console.log(error)
+        return
+    }
+})
+
+sudokuSolverJob.start()
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`)
